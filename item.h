@@ -3,13 +3,15 @@
 #include <iostream>
 class Item {
 public:
+	Item();
 	Item(int x, int y, std::string name);
 	void setLocation(int x, int y);
 	void getLocation();
 	void setStats(int lit, int str, int thf, bool isKey);
 	void setAllocated(int i) { this->allocated = i; }
 	bool getAllocated() { return this->allocated; }
-	bool isSameItem(Item i1, Item i2) { return i1.name == i2.name; }
+	bool isSameItem(Item i) { return this->name == i.name; }
+	std::string getName() { return this->name; }
 
 private: 
 	int lit, str, thf;

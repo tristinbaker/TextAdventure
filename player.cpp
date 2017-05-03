@@ -1,13 +1,12 @@
 #include "player.h"
-#ifndef ITEM_H
-#define ITEM_H
-#ifndef MAP_H
-#define MAP_H
+#include "item.h"
 
 Player::Player(int x, int y) {
 	this->x = x;
 	this->y = y;
 }
+
+Player::~Player() {}
 
 int Player::findNextSlot() {
 	for(int i = 0; i < 128; i++) {
@@ -27,10 +26,10 @@ void Player::giveItem(Item item) {
 }
 
 void Player::takeItem(Item item) {
-	Item findItem = new Item(0, 0, " ");
+	Item findItem;
 	findItem = this->inventory[0];
-	for(int i = 0; findItem != item; i++) {
-		if(isSameItem(item, findItem)) {
+	for(int i = 0; findItem.getName() != item.getName(); i++) {
+		if(findItem.isSameItem(item)) {
 			this->inventory[i].setAllocated(0);
 		} else {
 			findItem = this->inventory[i];
@@ -57,5 +56,3 @@ void Player::seeStats() {
 void Player::setStats(int stat) {
 
 }
-#endif
-#endif

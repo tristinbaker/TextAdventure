@@ -1,6 +1,8 @@
 #include "item.h"
 #include <iostream>
 
+Item::Item() {}
+
 Item::Item(int x, int y, std::string name) {
 	this->x = x;
 	this->y = y;
