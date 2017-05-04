@@ -14,6 +14,7 @@ public:
 	void getLocation();
 	void seeStats();
 	void setStats(int stat);
+	void deleteItem(int index);
 
 private:
 	Item inventory[128];

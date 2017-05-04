@@ -12,6 +12,10 @@ public:
 	bool getAllocated() { return this->allocated; }
 	bool isSameItem(Item i) { return this->name == i.name; }
 	std::string getName() { return this->name; }
+	void deleteItem(Item item);
+	void setX(int x) { this->x = x; }
+	void setY(int y) { this->y = y; }
+	void setName(std::string name) { this->name = name; }
 
 private: 
 	int lit, str, thf;
