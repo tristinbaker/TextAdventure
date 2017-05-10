@@ -18,9 +18,11 @@ public:
 
 private:
 	Item inventory[128];
+	Item equippedItem;
 	int x, y;
 	int literacyStat, strengthStat, thiefStat;	
-
+	int healthPoints;
+	int maxHealth;
 
 
 };

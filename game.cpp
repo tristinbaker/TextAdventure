@@ -6,6 +6,22 @@
 #include <iostream>
 
 void init() {
+
+//	Room::Room(std::string lore, bool hasLock, bool hasItem, bool hasEnemy, std::string roomName) {
+
+	Map map = Map();
+	std::string lore = "This is the start.";
+	bool hasLock = false;
+	bool hasItem = true;
+	bool hasEnemy = false;
+	std::string roomName = "START";
+
+	Room room = Room(lore, hasLock, hasItem, hasEnemy, roomName);
+	map.setRoom(room, 9, 2); 
+	map.printMap();
+
+
+	/*int choice;
 	int playerX = 0, playerY = 0;
 	Player player = Player(playerX, playerY);	
 
@@ -32,5 +48,5 @@ void init() {
 	std::cout << "Taking gun." << std::endl;
 	player.takeItem(items[0]);
 	player.seeInventory();
+	*/
 }
-

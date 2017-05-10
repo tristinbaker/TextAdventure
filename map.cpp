@@ -1,14 +1,32 @@
 #include "map.h"
+#include "room.h"
 
-Map::Map() {}
-Map::~Map() {}
-
-void Map::setRoom(std::string lore, std::string special[5], bool hasLock, bool hasItem) {
-	this->lore = lore;
-	for(int i = 0; i < 5; i++) {
-		this->special[i] = special[i];
+Map::Map() {
+	Room blankRoom;
+	blankRoom.setLore("");
+	blankRoom.setLock(false);
+	blankRoom.setEnemy(false);
+	blankRoom.setBoss(false);
+	blankRoom.setName("EMPTY");
+	
+	for(int i = 0; i < 10; i++) {
+		for(int j = 0; j < 10; j++) {
+			rooms[i][j] = blankRoom;
+		}
 	}
-	this->hasLock = hasLock;
-	this->hasItem = hasItem;	
 }
 
+Map::~Map() {}
+
+void Map::printMap() {
+	for(int i = 0; i < 10; i++) {
+		std::cout << " ---------------------------------------------------------------------------------" << std::endl;
+		for(int j = 0; j < 10; j++) {
+			std::cout << " | " << rooms[i][j].getName();
+			if(j == 9) {
+				std::cout << " |" << std::endl;
+			}
+		}
+	} 
+	std::cout << " ---------------------------------------------------------------------------------" << std::endl;
+}
