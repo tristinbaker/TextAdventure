@@ -73,3 +73,7 @@ void Player::setStats(int stat) {
 
 }
 
+void Player::setRoom(Room room) {
+	this->currRoom = room;
+}
+

@@ -10,7 +10,7 @@ Item::Item(int x, int y, std::string name) {
 }
 
 void Item::setLocation(int x, int y) {
-
+	
 }
 
 void Item::getLocation() {
@@ -18,7 +18,10 @@ void Item::getLocation() {
 }
 
 void Item::setStats(int lit, int str, int thf, bool isKey){
-
+	this->lit = lit;
+	this->str = str;
+	this->thf = thf;
+	this->isKey = isKey;
 }
 
 void Item::deleteItem(Item item) {

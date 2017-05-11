@@ -1,5 +1,6 @@
 #include "map.h"
 #include "room.h"
+#include "player.h"
 
 Map::Map() {
 	Room blankRoom;
@@ -18,11 +19,15 @@ Map::Map() {
 
 Map::~Map() {}
 
-void Map::printMap() {
+void Map::printMap(Player player) {
 	for(int i = 0; i < 10; i++) {
 		std::cout << " ---------------------------------------------------------------------------------" << std::endl;
 		for(int j = 0; j < 10; j++) {
-			std::cout << " | " << rooms[i][j].getName();
+			if(rooms[i][j].getName() == player.getRoom()) {
+				std::cout << " | " << "\033[1;31m" << rooms[i][j].getName() << "\033[0m";
+			} else {
+				std::cout << " | " << rooms[i][j].getName();
+			}
 			if(j == 9) {
 				std::cout << " |" << std::endl;
 			}
