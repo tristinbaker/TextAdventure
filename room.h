@@ -15,6 +15,7 @@ public:
 	void setBoss(bool hasBoss) { this->hasBoss = hasBoss; }
 	void setName(std::string roomName) { this->roomName = roomName; } 
 	std::string getName() { return roomName; }
+	std::string getLore() { return lore; }
 
 private: 	
 	std::string lore;

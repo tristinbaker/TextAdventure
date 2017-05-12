@@ -17,7 +17,9 @@ public:
 	void setStats(int stat);
 	void deleteItem(int index);
 	void setRoom(Room room);
-	std::string getRoom() { return this->currRoom.getName(); }
+	Room getRoom() { return this->currRoom; }
+	std::string getRoomName() { return this->currRoom.getName(); }
+	bool alive() { return this->healthPoints >= 0; }
 
 private:
 	Item inventory[128];
@@ -25,8 +27,8 @@ private:
 	Room currRoom;
 	int x, y;
 	int literacyStat, strengthStat, thiefStat;	
-	int healthPoints;
-	int maxHealth;
+	int healthPoints = 100;
+	int maxHealth = 100;
 
 };
 #endif
