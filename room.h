@@ -1,6 +1,7 @@
 #ifndef ROOM_H
 #define ROOM_H
 #include <iostream>
+#include "menu.h"
 
 class Room {
 
@@ -14,15 +15,17 @@ public:
 	void setEnemy(bool hasEnemy) { this->hasEnemy = hasEnemy; }
 	void setBoss(bool hasBoss) { this->hasBoss = hasBoss; }
 	void setName(std::string roomName) { this->roomName = roomName; } 
-	std::string getName() { return roomName; }
+	std::string getRoomName() { return roomName; }
 	std::string getLore() { return lore; }
+	void setChoice(int i, std::string choice) { this->menu.setChoice(i, choice); }
+	Menu getMenu() { return this->menu; }
 
 private: 	
 	std::string lore;
-	std::string special[5];
 	bool hasLock = false, hasItem = false;
 	bool hasEnemy;
 	bool hasBoss;
 	std::string roomName;
+	Menu menu;	
 };
 #endif

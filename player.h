@@ -18,7 +18,7 @@ public:
 	void deleteItem(int index);
 	void setRoom(Room room);
 	Room getRoom() { return this->currRoom; }
-	std::string getRoomName() { return this->currRoom.getName(); }
+	std::string getRoomName() { return this->currRoom.getRoomName(); }
 	bool alive() { return this->healthPoints >= 0; }
 
 private:
