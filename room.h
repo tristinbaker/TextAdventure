@@ -2,13 +2,15 @@
 #define ROOM_H
 #include <iostream>
 #include "menu.h"
+#include "item.h"
 
 class Room {
 
 public: 
 	Room();	
-	Room(std::string lore, bool hasLock, bool hasItem, bool hasEnemy, std::string name);
+	Room(bool hasLock, bool hasItem, bool hasEnemy, std::string name);
 	~Room();	
+	void determineLore();
 	void setLore(std::string lore) { this->lore = lore; }
 	void setLock(bool hasLock) { this->hasLock = hasLock; }
 	void setItem(bool hasItem) { this->hasItem = hasItem; }
@@ -19,6 +21,9 @@ public:
 	std::string getLore() { return lore; }
 	void setChoice(int i, std::string choice) { this->menu.setChoice(i, choice); }
 	Menu getMenu() { return this->menu; }
+	Item getItem() { return this->item; }
+	bool containsItem() { return this->hasItem; }
+	void setItem(Item item) { this->item = item; }
 
 private: 	
 	std::string lore;
@@ -27,5 +32,6 @@ private:
 	bool hasBoss;
 	std::string roomName;
 	Menu menu;	
+	Item item;
 };
 #endif

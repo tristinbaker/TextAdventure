@@ -3,18 +3,8 @@
 
 Item::Item() {}
 
-Item::Item(int x, int y, std::string name) {
-	this->x = x;
-	this->y = y;
+Item::Item(std::string name) {
 	this->name = name;
-}
-
-void Item::setLocation(int x, int y) {
-	
-}
-
-void Item::getLocation() {
-
 }
 
 void Item::setStats(int lit, int str, int thf, bool isKey){
@@ -25,8 +15,6 @@ void Item::setStats(int lit, int str, int thf, bool isKey){
 }
 
 void Item::deleteItem(Item item) {
-	item.setX(0);
-	item.setY(0);
 	item.setName("");
 }
 

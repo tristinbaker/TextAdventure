@@ -41,8 +41,12 @@ void Player::takeItem(Item item) {
 
 void Player::seeInventory() {
 	for(int i = 0; i < 128; i++) {
-		if(this->inventory[i].getName() != "") {	
-			std::cout << "Item " << i << ": " << this->inventory[i].getName() << std::endl;
+		if(this->inventory[i].getName() != "") {
+			std::cout << "-----------------------------------" << std::endl;
+			std::cout << "         | " << this->inventory[i].getName() << " |" << std::endl;
+			std::cout << "| " << "Lit: " << this->inventory[i].getLit() << " | Str: " << 
+				this->inventory[i].getStr() << " | Thf: " << this->inventory[i].getThf() << " |" << std::endl;
+			std::cout << "-----------------------------------" << std::endl;	
 		}
 	}
 }

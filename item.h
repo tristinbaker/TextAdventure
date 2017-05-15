@@ -4,22 +4,20 @@
 class Item {
 public:
 	Item();
-	Item(int x, int y, std::string name);
-	void setLocation(int x, int y);
-	void getLocation();
+	Item(std::string name);
 	void setStats(int lit, int str, int thf, bool isKey);
 	void setAllocated(int i) { this->allocated = i; }
 	bool getAllocated() { return this->allocated; }
 	bool isSameItem(Item i) { return this->name == i.name; }
 	std::string getName() { return this->name; }
 	void deleteItem(Item item);
-	void setX(int x) { this->x = x; }
-	void setY(int y) { this->y = y; }
 	void setName(std::string name) { this->name = name; }
+	int getLit() { return this->lit; }
+	int getStr() { return this->str; }
+	int getThf() { return this->thf; }
 
 private: 
 	int lit, str, thf;
-	int x, y;
 	bool isKey;
 	std::string name;
 	bool allocated = 0;
