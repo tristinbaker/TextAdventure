@@ -17,67 +17,66 @@ void init() {
 	std::string roomName = "START";
 	std::string lore = "";
 
-	Room *room = new Room(hasLock, hasItem, hasEnemy, roomName);
-	map.allocRoom(*room, 9, 2); 
+	Room room = Room(hasLock, hasItem, hasEnemy, roomName);
+	map.allocRoom(room, 9, 2); 
 	player.setRoom(room);
-	map.setRoom("START");
 
 	hasItem = false;
 	roomName = "ARTIE"; 
-	room = new Room(hasLock, hasItem, hasEnemy, roomName);
-	map.allocRoom(*room, 9, 1);
+	room = Room(hasLock, hasItem, hasEnemy, roomName);
+	map.allocRoom(room, 9, 1);
 
 	roomName = "DAYAK"; 
-	room = new Room(hasLock, hasItem, hasEnemy, roomName);
-	map.allocRoom(*room, 9, 0);
+	room = Room(hasLock, hasItem, hasEnemy, roomName);
+	map.allocRoom(room, 9, 0);
 
 	roomName = "     "; 
-	room = new Room(hasLock, hasItem, hasEnemy, roomName);
-	map.allocRoom(*room, 8, 0);
+	room = Room(hasLock, hasItem, hasEnemy, roomName);
+	map.allocRoom(room, 8, 0);
 
 	roomName = "MITRE"; 
-	room = new Room(hasLock, hasItem, hasEnemy, roomName);
-	map.allocRoom(*room, 8, 1);
+	room = Room(hasLock, hasItem, hasEnemy, roomName);
+	map.allocRoom(room, 8, 1);
 
 	roomName = "     "; 
-	room = new Room(hasLock, hasItem, hasEnemy, roomName);
-	map.allocRoom(*room, 8, 2);
+	room = Room(hasLock, hasItem, hasEnemy, roomName);
+	map.allocRoom(room, 8, 2);
 
 	roomName = "IONIA"; 
-	room = new Room(hasLock, hasItem, hasEnemy, roomName);
-	map.allocRoom(*room, 7, 0);
+	room = Room(hasLock, hasItem, hasEnemy, roomName);
+	map.allocRoom(room, 7, 0);
 
 	roomName = "FAULT"; 
-	room = new Room(hasLock, hasItem, hasEnemy, roomName);
-	map.allocRoom(*room, 7, 1);
+	room = Room(hasLock, hasItem, hasEnemy, roomName);
+	map.allocRoom(room, 7, 1);
 
 	roomName = "ARTEL"; 
-	room = new Room(hasLock, hasItem, hasEnemy, roomName);
-	map.allocRoom(*room, 7, 2);
+	room = Room(hasLock, hasItem, hasEnemy, roomName);
+	map.allocRoom(room, 7, 2);
 
 	roomName = "     "; 
-	room = new Room(hasLock, hasItem, hasEnemy, roomName);
-	map.allocRoom(*room, 6, 0);
+	room = Room(hasLock, hasItem, hasEnemy, roomName);
+	map.allocRoom(room, 6, 0);
 
 	roomName = "DRUID"; 
-	room = new Room(hasLock, hasItem, hasEnemy, roomName);
-	map.allocRoom(*room, 6, 1);
+	room = Room(hasLock, hasItem, hasEnemy, roomName);
+	map.allocRoom(room, 6, 1);
 
 	roomName = "     "; 
-	room = new Room(hasLock, hasItem, hasEnemy, roomName);
-	map.allocRoom(*room, 6, 2);
+	room = Room(hasLock, hasItem, hasEnemy, roomName);
+	map.allocRoom(room, 6, 2);
 
 	roomName = "     "; 
-	room = new Room(hasLock, hasItem, hasEnemy, roomName);
-	map.allocRoom(*room, 5, 0);
+	room = Room(hasLock, hasItem, hasEnemy, roomName);
+	map.allocRoom(room, 5, 0);
 
 	roomName = "TARIM"; 
-	room = new Room(hasLock, hasItem, hasEnemy, roomName);
-	map.allocRoom(*room, 5, 1);
+	room = Room(hasLock, hasItem, hasEnemy, roomName);
+	map.allocRoom(room, 5, 1);
 
 	roomName = "TIRED"; 
-	room = new Room(hasLock, hasItem, hasEnemy, roomName);
-	map.allocRoom(*room, 5, 2);
+	room = Room(hasLock, hasItem, hasEnemy, roomName);
+	map.allocRoom(room, 5, 2);
 
 	/*int choice;
 	int playerX = 0, playerY = 0;
@@ -114,8 +113,8 @@ void gameLoop() {
 	int choice = 0;
 	std::string strChoice = "";
 	char charChoice = '0';
-	Room * currRoom = player.getRoom();
-	map.setRoom(currRoom->getRoomName());
+	Room currRoom = player.getRoom();
+	map.setRoom(currRoom.getRoomName());
 	Item item; 
 	int itemIndex = 0;
 
@@ -136,18 +135,18 @@ void gameLoop() {
 	while(player.alive()) {
 		charChoice = '0';
 		std::cout << "\033[2J\033[1;1H";
-		if(currRoom->getRoomName() == "START") {
-			std::cout << currRoom->getLore() << std::endl;
-			std::cout << "currRoom.containsItem(): " << currRoom->containsItem() << std::endl;
-			currRoom->determineLore();
-			if(currRoom->containsItem()) {
+		if(currRoom.getRoomName() == "START") {
+			std::cout << currRoom.getLore() << std::endl;
+			std::cout << "currRoom.containsItem(): " << currRoom.containsItem() << std::endl;
+			currRoom.determineLore();
+			if(currRoom.containsItem()) {
 
-				currRoom->setChoice(0, "Leave room. (Left)");
-				currRoom->setChoice(1, "Pick up sword.");
-				currRoom->setChoice(2, "View map.");
-				currRoom->setChoice(3, "View inventory.");
-				currRoom->setChoice(4, "Save and quit.");
-				currRoom->getMenu().printChoices();
+				currRoom.setChoice(0, "Leave room. (Left)");
+				currRoom.setChoice(1, "Pick up sword.");
+				currRoom.setChoice(2, "View map.");
+				currRoom.setChoice(3, "View inventory.");
+				currRoom.setChoice(4, "Save and quit.");
+				currRoom.getMenu().printChoices();
 				std::cin >> choice;
 	
 				switch(choice) {
@@ -163,7 +162,7 @@ void gameLoop() {
 						player.giveItem(item);
 						items[itemIndex] = item;
 						itemIndex++;
-						currRoom->setItem(false);
+						currRoom.setItem(false);
 						std::cout << "Picked up " << item.getName() << "." << std::endl;
 						break;
 					case 3:
@@ -186,12 +185,12 @@ void gameLoop() {
 						return;
 				}
 			} else {
-				currRoom->setChoice(0, "Leave room. (Left)");
-				currRoom->setChoice(1, "View map.");
-				currRoom->setChoice(2, "View inventory.");	
-				currRoom->setChoice(3, "Save and quit.");
-				currRoom->setChoice(4, "");
-				currRoom->getMenu().printChoices();
+				currRoom.setChoice(0, "Leave room. (Left)");
+				currRoom.setChoice(1, "View map.");
+				currRoom.setChoice(2, "View inventory.");	
+				currRoom.setChoice(3, "Save and quit.");
+				currRoom.setChoice(4, "");
+				currRoom.getMenu().printChoices();
 				std::cin >> choice;
 				switch(choice) {
 					case 1:
@@ -219,18 +218,18 @@ void gameLoop() {
 						return;
 				}
 			}
-		} else if(currRoom->getRoomName() == "ARTIE") {
+		} else if(currRoom.getRoomName() == "ARTIE") {
 			std::cout << "In ARTIE." << std::endl;
-			std::cout << currRoom->getLore() << std::endl;
-			currRoom->setChoice(0, "Leave room. (Left)");  	
-			currRoom->setChoice(1, "Leave room. (Right)");  	
-			currRoom->setChoice(2, "Leave room. (Up)");  	
-			currRoom->setChoice(3, "View map.");
-			currRoom->setChoice(4, "View inventory.");
-			currRoom->setChoice(5, "Save and quit.");
-			currRoom->getMenu().printChoices();
+			std::cout << currRoom.getLore() << std::endl;
+			currRoom.setChoice(0, "Leave room. (Left)");  	
+			currRoom.setChoice(1, "Leave room. (Right)");  	
+			currRoom.setChoice(2, "Leave room. (Up)");  	
+			currRoom.setChoice(3, "View map.");
+			currRoom.setChoice(4, "View inventory.");
+			currRoom.setChoice(5, "Save and quit.");
+			currRoom.getMenu().printChoices();
 			std::cin >> choice;
-			currRoom->setItem(false);
+			currRoom.setItem(false);
 			switch(choice) {
 				case 1: 
 					map.setRoom("DAYAK");
@@ -261,7 +260,7 @@ void gameLoop() {
 				default: 
 					return;
 			}		
-		} /*else if(currRoom.getRoomName() == "DAYAK") {
+		} else if(currRoom.getRoomName() == "DAYAK") {
 			std::cout << "In DAYAK." << std::endl;
 			currRoom.setChoice(0, "Leave room. (Right)");  	
 			currRoom.setChoice(1, "View map.");
@@ -323,7 +322,7 @@ void gameLoop() {
 				default: 
 					return;
 			}		
-		} */
-	} 	
+		}
+	}	
 }
 

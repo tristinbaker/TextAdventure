@@ -16,15 +16,15 @@ public:
 	void seeStats();
 	void setStats(int stat);
 	void deleteItem(int index);
-	void setRoom(Room room);
-	Room getRoom() { return this->currRoom; }
-	std::string getRoomName() { return this->currRoom.getRoomName(); }
+	void setRoom(Room * room);
+	Room * getRoom() { return this->currRoom; }
+	std::string getRoomName() { return this->currRoom->getRoomName(); }
 	bool alive() { return this->healthPoints >= 0; }
 
 private:
 	Item inventory[128];
 	Item equippedItem;
-	Room currRoom;
+	Room * currRoom;
 	int x, y;
 	int literacyStat, strengthStat, thiefStat;	
 	int healthPoints = 100;
