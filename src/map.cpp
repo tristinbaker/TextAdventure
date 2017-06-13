@@ -35,6 +35,7 @@ void Map::setRoom(std::string roomName) {
 	for(int i = 0; i < 10; i++) {
 		for(int j = 0; j < 10; j++) {
 			if(roomName == rooms[i][j]->getRoomName()) {
+                std::cout << "roomName: " << roomName << "rooms[" << i << "][" << j << "->getRoomName(): " << rooms[i][j]->getRoomName() << std::endl;
 				this->currRoom = rooms[i][j];
 			}
 		}

@@ -2,6 +2,7 @@
 #include "item.h"
 
 #include <iostream>
+#include <iomanip>
 
 Player::Player(int x, int y) {
 	this->x = x;
@@ -39,6 +40,33 @@ void Player::takeItem(Item item) {
 	}
 }
 
+void Player::equipItem(Item item, std::string tag) {
+    if(tag == "weapon") {
+        this->equippedWeapon = item;
+    } else if(tag == "helm") {
+        this->equippedHelm = item;
+    } else if(tag == "chest") {
+        this->equippedChest = item;
+    } else if(tag == "pants") {
+        this->equippedPants = item;
+    } else if(tag == "gloves") {
+        this->equippedGloves = item;
+    } else {
+        std::cout << "Unable to equip item." << std::endl;
+    }
+}
+
+void Player::getEquipment() {
+    std::cout << std::setw(50) << std::setfill('-') << "-" << std::endl << std::setfill(' '); 
+    std::cout << "| " << std::left << this->name << " |" << std::endl;
+    std::cout << "| Weapon: " << std::left << this->equippedWeapon.getName() << " |" << std::endl;
+    std::cout << "| Helmet: " << std::left << this->equippedHelm.getName() << " |" << std::endl;
+    std::cout << "| Chest:  " << std::left << this->equippedChest.getName() << " |" << std::endl;
+    std::cout << "| Gloves: " << std::left << this->equippedGloves.getName() << " |" << std::endl;
+    std::cout << "| Pants:  " << std::left << this->equippedPants.getName() << " |" << std::endl;
+    std::cout << std::setfill('-') << "-" << std::endl; 
+}
+
 void Player::seeInventory() {
 	for(int i = 0; i < 128; i++) {
 		if(this->inventory[i].getName() != "") {
@@ -69,7 +97,7 @@ void Player::getLocation() {
 
 }
 
-void Player::seeStats() {
+void Player::getStats() {
 
 }
 
