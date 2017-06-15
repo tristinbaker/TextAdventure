@@ -1,5 +1,5 @@
 CC = g++
-CFLAGS = -w -std=c++11 
+CFLAGS = -std=c++11 -w
 
 game: main.o item.o game.o player.o map.o room.o menu.o
 	$(CC) $(CFLAGS) -o game main.o item.o game.o player.o map.o room.o menu.o
@@ -11,4 +11,4 @@ run: main.o item.o game.o player.o map.o room.o menu.o
 	../game
 
 clean :
-	rm ../game
+	rm ../game *.o

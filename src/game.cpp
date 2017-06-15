@@ -89,14 +89,14 @@ void gameLoop() {
     welcome +=            "  T H E D U N G E O N   \n\n";
     welcome +=            "    Are you ready? (Y/N)\n";
     std::cout << "\033[2J\033[1;1H";
-    /*for(int i = 0; i < welcome.size(); i++) {
+    for(int i = 0; i < welcome.size(); i++) {
         std::cout << welcome[i] << std::flush;
         usleep(100000);
     }
     std::cin >> strChoice;
     if(strChoice != "Y" && strChoice != "y") {
         return;
-    }*/
+    }
 
     // Set initial equipment for the player.
     item.setName("Empty");
