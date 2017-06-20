@@ -1,9 +1,11 @@
 #include "notebook.h"
 
+Notebook::Notebook() {}
+
 //TODO: Make this be read from a file.
 void Notebook::determineLore() {
-	if(this->currRoom.getName == "START") {
-		if(this->currRoom.containsItem()) {
+	if(this->currRoom->getRoomName() == "START") {
+		if(this->currRoom->containsItem()) {
 			this->lore = 
 				"  Your head throbs, your body aches, as you slowly come to. You don't remember what happened before you fell asleep and as \n";
 			this->lore += 
@@ -28,7 +30,7 @@ void Notebook::determineLore() {
 			this->lore = 
 				"You've picked up a rusty sword. What do you do now?\n";
 		}
-	} else if(this->currRoom.getName() == "ARTIE") {
+	} else if(this->currRoom->getRoomName() == "ARTIE") {
 		this->lore = "  In ARTIE.\n";
 	}
 }

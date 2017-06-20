@@ -57,14 +57,35 @@ void Player::equipItem(Item item, std::string tag) {
 }
 
 void Player::getEquipment() {
-    std::cout << std::setw(50) << std::setfill('-') << "-" << std::endl << std::setfill(' '); 
-    std::cout << "| " << std::left << this->name << " |" << std::endl;
-    std::cout << "| Weapon: " << std::left << this->equippedWeapon.getName() << " |" << std::endl;
-    std::cout << "| Helmet: " << std::left << this->equippedHelm.getName() << " |" << std::endl;
-    std::cout << "| Chest:  " << std::left << this->equippedChest.getName() << " |" << std::endl;
-    std::cout << "| Gloves: " << std::left << this->equippedGloves.getName() << " |" << std::endl;
-    std::cout << "| Pants:  " << std::left << this->equippedPants.getName() << " |" << std::endl;
-    std::cout << std::setfill('-') << "-" << std::endl; 
+   
+    // Weapon information
+    std::cout << std::setw(45) << std::setfill('-') << "-" << std::endl << std::setfill(' ');
+    std:: cout << "| Weapon: " << std::setw(15) << std::left << this->equippedWeapon.getName()  
+        << " |" << " Strength: " << std::setw(5) << this->equippedWeapon.getStr() << " |" 
+        << std::endl;  
+    std::cout << std::setw(45) << std::setfill('-') << "-" << std::endl << std::setfill(' ');
+
+    // Armor Information
+    std::cout << std::setw(45) << std::setfill('-') << "-" << std::endl << std::setfill(' ');
+    std:: cout << "| Head:   " << std::setw(15) << this->equippedHelm.getName() << " |" << 
+        " Defense:  " << std::setw(5) << this->equippedHelm.getDef() << " |" << std::endl;  
+    std::cout << std::setw(45) << std::setfill('-') << "-" << std::endl << std::setfill(' ');
+
+    std::cout << std::setw(45) << std::setfill('-') << "-" << std::endl << std::setfill(' ');
+    std:: cout << "| Chest:  " << std::setw(15) << this->equippedChest.getName() << " |" << 
+        " Defense:  " << std::setw(5) << this->equippedChest.getDef() << " |" << std::endl;  
+    std::cout << std::setw(45) << std::setfill('-') << "-" << std::endl << std::setfill(' ');
+
+    std::cout << std::setw(45) << std::setfill('-') << "-" << std::endl << std::setfill(' ');
+    std:: cout << "| Hands:  " << std::setw(15) << this->equippedGloves.getName() << " |" << 
+        " Defense:  " << std::setw(5) << this->equippedGloves.getDef() << " |" << std::endl;  
+    std::cout << std::setw(45) << std::setfill('-') << "-" << std::endl << std::setfill(' ');
+
+    std::cout << std::setw(45) << std::setfill('-') << "-" << std::endl << std::setfill(' ');
+    std:: cout << "| Legs:   " << std::setw(15) << this->equippedPants.getName() << " |" << 
+        " Defense:  " << std::setw(5) << this->equippedPants.getDef() << " |" << std::endl;  
+    std::cout << std::setw(45) << std::setfill('-') << "-" << std::endl << std::setfill(' ');
+
 }
 
 void Player::seeInventory() {

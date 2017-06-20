@@ -2,9 +2,11 @@
 #include "map.h"
 #include "player.h"
 #include "item.h"
+#include "notebook.h"
 
 #include <iostream>
 #include <unistd.h>
+#include <fstream>
 
 Player player = Player(9, 2);
 Map map = Map();
@@ -54,15 +56,21 @@ void init() {
 }
 
 void gameLoop() {
-
+    
+    // Player input variables
 	int choice = 0;
 	std::string strChoice = "";
 	char charChoice = '0';
+
+    // Game variables
 	Room * currRoom = player.getRoom();
 	map.setRoom(currRoom->getRoomName());
 	Item item; 
 	int itemIndex = 0;
     Menu menu;
+    Notebook notebook;
+
+    notebook.setRoom(currRoom);
 
 	std::cout << "\033[2J\033[1;1H";
 	std::cout << "--------------------------------------------------" << std::endl;
@@ -97,38 +105,54 @@ void gameLoop() {
     if(strChoice != "Y" && strChoice != "y") {
         return;
     }
+    
 
     // Set initial equipment for the player.
     item.setName("Empty");
     item = Item(item.getName());
+    item.setStats(0, 0, 0, false, 0);
     player.equipItem(item, "weapon");
-    item.setName("Ragged shirt");
-    item = Item(item.getName());
-    player.equipItem(item, "chest");
-    item.setName("Torn pants");
-    item = Item(item.getName());
-    player.equipItem(item, "pants");
+
     item.setName("Empty");
     item = Item(item.getName());
+    item.setStats(0, 0, 0, false, 0);
     player.equipItem(item, "gloves");
+
+    item.setName("Empty");
+    item = Item(item.getName());
+    item.setStats(0, 0, 0, false, 0);
+    player.equipItem(item, "helm");
+
+    item.setName("Ragged shirt");
+    item = Item(item.getName());
+    item.setStats(0, 0, 0, false, 3);
+    player.equipItem(item, "chest");
+
+    item.setName("Torn pants");
+    item = Item(item.getName());
+    item.setStats(0, 0, 0, false, 2);
+    player.equipItem(item, "pants");
+     
 
 	while(player.alive()) {
         menu.clearChoices();
 		charChoice = '0';
 		std::cout << "\033[2J\033[1;1H";
 		if(currRoom->getRoomName() == "START") {
-			currRoom->determineLore();
+			notebook.determineLore();
+            currRoom->determineLore();
             std::cout << currRoom->getLore();
 			if(currRoom->containsItem()) {
 				menu.setChoice(0, "Leave room. (Left)");
 				menu.setChoice(1, "Pick up sword.");
-				menu.setChoice(2, "View map.");
-				menu.setChoice(3, "View inventory.");
-                menu.setChoice(4, "View equipment.");
-				menu.setChoice(5, "Save and quit.");
+                menu.setChoice(2, "View notebook.");
+				menu.setChoice(3, "View map.");
+				menu.setChoice(4, "View inventory.");
+                menu.setChoice(5, "View equipment.");
+				menu.setChoice(6, "Save and quit.");
                 std::cout << std::endl;
 				menu.printChoices();
-                std::cout << std::endl << "What is your choice? " << std::endl;
+                std::cout << std::endl << "What is your choice? ";
 				std::cin >> choice;
 	
 				switch(choice) {
@@ -138,14 +162,16 @@ void gameLoop() {
 						player.setRoom(currRoom);
 						break;
 					case 2:
+		                std::cout << "\033[2J\033[1;1H";
 						item.setName("Rusty Sword");
 						item = Item(item.getName());
-						item.setStats(0, 5, 0, false);
+						item.setStats(0, 5, 0, false, 0);
 						player.giveItem(item);
 						items[itemIndex] = item;
 						itemIndex++;
 						currRoom->setItem(false);
-                        std::cout << "Picked up " << item.getName() << ". Would you like to equip the " <<
+                        loadArt("weapons/RustySword");
+                        std::cout << "\nPicked up " << item.getName() << ". Would you like to equip the " <<
                             item.getName() << "? (Y/N)" << std::endl;
                         std::cin >> charChoice;
                         if(charChoice == 'Y' || charChoice == 'y') {
@@ -154,28 +180,39 @@ void gameLoop() {
                             break;
                         }
 						break;
-					case 3:
-						map.printMap(*currRoom);
-						std::cout << "Press 'y' followed by 'ENTER' to continue." << std::endl;
+                    case 3:
+		                std::cout << "\033[2J\033[1;1H";
+                        std::cout << notebook.getLore();
+						std::cout << "\nPress 'y' followed by 'ENTER' to continue." << std::endl;
 						while(charChoice != 'y') {
 							std::cin >> charChoice;
 						}
 						break;
 					case 4:
-						player.seeInventory();
-						std::cout << "Press 'y' followed by 'ENTER' to continue." << std::endl;
+		                std::cout << "\033[2J\033[1;1H";
+						map.printMap(*currRoom);
+						std::cout << "\nPress 'y' followed by 'ENTER' to continue." << std::endl;
 						while(charChoice != 'y') {
 							std::cin >> charChoice;
 						}
 						break;
 					case 5:
-                        player.getEquipment();
-						std::cout << "Press 'y' followed by 'ENTER' to continue." << std::endl;
+		                std::cout << "\033[2J\033[1;1H";
+						player.seeInventory();
+						std::cout << "\nPress 'y' followed by 'ENTER' to continue." << std::endl;
 						while(charChoice != 'y') {
 							std::cin >> charChoice;
 						}
 						break;
-                    case 6:
+					case 6:
+		                std::cout << "\033[2J\033[1;1H";
+                        player.getEquipment();
+						std::cout << "\nPress 'y' followed by 'ENTER' to continue." << std::endl;
+						while(charChoice != 'y') {
+							std::cin >> charChoice;
+						}
+						break;
+                    case 7:
                         return;
 					default: 
                         std::cout << "You entered an invalid option. Try again." << std::endl;
@@ -183,12 +220,14 @@ void gameLoop() {
 				}
 			} else {
 				menu.setChoice(0, "Leave room. (Left)");
-				menu.setChoice(1, "View map.");
-				menu.setChoice(2, "View inventory.");	
-                menu.setChoice(3, "View equipment.");
-				menu.setChoice(4, "Save and quit.");
+                menu.setChoice(1, "View notebook.");
+				menu.setChoice(2, "View map.");
+				menu.setChoice(3, "View inventory.");	
+                menu.setChoice(4, "View equipment.");
+				menu.setChoice(5, "Save and quit.");
                 std::cout << std::endl;
 				menu.printChoices();
+                std::cout << std::endl << "What is your choice? ";
 				std::cin >> choice;
 				switch(choice) {
 					case 1:
@@ -196,28 +235,39 @@ void gameLoop() {
 						currRoom = map.getRoom();
 						player.setRoom(currRoom);
 						break;
-					case 2:
-						map.printMap(*currRoom);
-						std::cout << "Press 'y' followed by 'ENTER' to continue." << std::endl;
+                    case 2:
+		                std::cout << "\033[2J\033[1;1H";
+                        std::cout << notebook.getLore();
+						std::cout << "\nPress 'y' followed by 'ENTER' to continue." << std::endl;
 						while(charChoice != 'y') {
 							std::cin >> charChoice;
 						}
 						break;
 					case 3:
-						player.seeInventory();
-						std::cout << "Press 'y' followed by 'ENTER' to continue." << std::endl;
+		                std::cout << "\033[2J\033[1;1H";
+						map.printMap(*currRoom);
+						std::cout << "\nPress 'y' followed by 'ENTER' to continue." << std::endl;
 						while(charChoice != 'y') {
 							std::cin >> charChoice;
 						}
 						break;
 					case 4:
-                        player.getEquipment();
-						std::cout << "Press 'y' followed by 'ENTER' to continue." << std::endl;
+		                std::cout << "\033[2J\033[1;1H";
+						player.seeInventory();
+						std::cout << "\nPress 'y' followed by 'ENTER' to continue." << std::endl;
 						while(charChoice != 'y') {
 							std::cin >> charChoice;
 						}
 						break;
 					case 5:
+		                std::cout << "\033[2J\033[1;1H";
+                        player.getEquipment();
+						std::cout << "\nPress 'y' followed by 'ENTER' to continue." << std::endl;
+						while(charChoice != 'y') {
+							std::cin >> charChoice;
+						}
+						break;
+					case 6:
 						return;
 					default: 
 						return;
@@ -231,8 +281,10 @@ void gameLoop() {
 			menu.setChoice(2, "Leave room. (Up)");  	
 			menu.setChoice(3, "View map.");
 			menu.setChoice(4, "View inventory.");
-			menu.setChoice(5, "Save and quit.");
+            menu.setChoice(5, "View equipment.");
+			menu.setChoice(6, "Save and quit.");
 			menu.printChoices();
+            std::cout << std::endl << "What is your choice? ";
 			std::cin >> choice;
 			currRoom->setItem(false);
 			switch(choice) {
@@ -252,6 +304,7 @@ void gameLoop() {
 					player.setRoom(currRoom);
 					break;
 				case 4:
+		            std::cout << "\033[2J\033[1;1H";
 					map.printMap(*currRoom);
 					std::cout << "Press 'y' followed by 'ENTER' to continue." << std::endl;
 					while(charChoice != 'y') {
@@ -259,13 +312,22 @@ void gameLoop() {
 					}
 					break;
 				case 5:
+		            std::cout << "\033[2J\033[1;1H";
 				    player.seeInventory();
 					std::cout << "Press 'y' followed by 'ENTER' to continue." << std::endl;
 					while(charChoice != 'y') {
 						std::cin >> charChoice;
 					}
 					break;
-				case 6:
+                case 6:
+		            std::cout << "\033[2J\033[1;1H";
+                    player.getEquipment();
+			        std::cout << "\nPress 'y' followed by 'ENTER' to continue." << std::endl;
+					while(charChoice != 'y') {
+						std::cin >> charChoice;
+					}
+					break;
+				case 7:
 					return;
 				default: 
                     std::cout << "You entered an invalid option. Try again." << std::endl;
@@ -275,3 +337,23 @@ void gameLoop() {
 	} 	
 }
 
+void loadArt(std::string artName) {
+    std::string shift;
+    std::string file;
+    file += "../art/";
+    file += artName;
+    file += ".art";
+    std::ifstream inFile;
+    inFile.open(file.c_str());
+
+    if (!inFile) {
+        std::cout << "Unable to open file.";
+        std::cout << file;
+        return;
+    }
+
+    while (std::getline(inFile, shift)) {
+        std::cout << shift << std::endl;
+    }
+   inFile.close();
+}

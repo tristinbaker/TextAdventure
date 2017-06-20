@@ -18,7 +18,9 @@ public:
 	void getLocation();
 	void setStats(int stat);
 	void getStats();
-    void setName(std::string name) { this-> name = name; }
+    void setLevel(int level) { this->level = level; }
+    int  getLevel() { return this->level; }
+    void setName(std::string name) { this->name = name; }
     std::string getName() { return this->name; }
 	void setRoom(Room * room);
 	Room * getRoom() { return this->currRoom; }
@@ -37,6 +39,7 @@ private:
 	int literacyStat, strengthStat, thiefStat;	
 	int healthPoints = 100;
 	int maxHealth = 100;
+    int level = 1;
     std::string name;
 
 };
