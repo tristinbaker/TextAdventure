@@ -22,10 +22,21 @@ public:
     int  getLevel() { return this->level; }
     void setName(std::string name) { this->name = name; }
     std::string getName() { return this->name; }
+    int getStr() { return this->strengthStat; }
 	void setRoom(Room * room);
 	Room * getRoom() { return this->currRoom; }
 	std::string getRoomName() { return this->currRoom->getRoomName(); }
+    void setCurrHP(int hp);
+    void takeDamage(int hp);
+    int getCurrHP() { return this->healthPoints; }
+    int getMaxHP() { return this->maxHealth; }
 	bool alive() { return this->healthPoints >= 0; }
+    int determineDmg();
+    void setPotionCount(int pc) { this->potionCount = pc; }
+    int getPotionCount() { return this->potionCount; }
+    void incrementPotionCount();
+    void decrementPotionCount();
+    bool hasPotion();
 
 private:
 	Item inventory[128];
@@ -40,6 +51,7 @@ private:
 	int healthPoints = 100;
 	int maxHealth = 100;
     int level = 1;
+    int potionCount;
     std::string name;
 
 };

@@ -2,6 +2,7 @@
 #include "item.h"
 
 #include <iostream>
+#include <random>
 #include <iomanip>
 
 Player::Player(int x, int y) {
@@ -130,3 +131,39 @@ void Player::setRoom(Room * room) {
 	this->currRoom = room;
 }
 
+int Player::determineDmg() {
+    int dmg;
+    int lowDmg = this->getStr();
+    int highDmg = this->getStr() + this->equippedWeapon.getStr(); 
+
+    std::random_device rd; 
+    std::mt19937 eng(rd()); 
+    std::uniform_int_distribution<> distr(lowDmg, highDmg);
+
+    dmg = distr(eng);
+    return dmg;
+
+}
+
+void Player::setCurrHP(int hp) {
+    this->healthPoints += hp;
+    if(this->healthPoints > 100) {
+        this->healthPoints = 100;
+    }
+}
+
+void Player::takeDamage(int hp) {
+    this->healthPoints = this->healthPoints - hp;
+}
+
+void Player::incrementPotionCount() {
+    this->setPotionCount(this->getPotionCount() + 1);
+}
+
+void Player::decrementPotionCount() {
+    this->setPotionCount(this->getPotionCount() - 1);
+}
+
+bool Player::hasPotion() {
+    return (this->potionCount > 0);
+}
