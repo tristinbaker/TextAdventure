@@ -8,6 +8,7 @@
 Player::Player(int x, int y) {
 	this->x = x;
 	this->y = y;
+    this->exp = 0;
 }
 
 Player::~Player() {}
@@ -89,6 +90,29 @@ void Player::getEquipment() {
 
 }
 
+void Player::getStats() {
+   
+    // Weapon information
+    std::cout << std::setw(40) << std::setfill('-') << "-" << std::endl << std::setfill(' ');
+    std:: cout << "| Name: " << std::setw(15) << std::left << this->getName()  
+        << " |" << " Level: " << std::setw(5) << this->getLevel() << " |" << std::endl;
+    std::cout << std::setw(40) << std::setfill('-') << "-" << std::endl << std::setfill(' ');
+
+    // Armor Information
+    std::cout << std::setw(40) << std::setfill('-') << "-" << std::endl << std::setfill(' ');
+    std:: cout << "| Strength: " << std::setw(26) << this->getStr() << " |" << std::endl; 
+    std::cout << std::setw(40) << std::setfill('-') << "-" << std::endl << std::setfill(' ');
+
+    std::cout << std::setw(40) << std::setfill('-') << "-" << std::endl << std::setfill(' ');
+    std:: cout << "| Literacy: " << std::setw(26) << this->getLit() << " |" << std::endl; 
+    std::cout << std::setw(40) << std::setfill('-') << "-" << std::endl << std::setfill(' ');
+
+    std::cout << std::setw(40) << std::setfill('-') << "-" << std::endl << std::setfill(' ');
+    std:: cout << "| Thief:    " << std::setw(26) << this->getThf() << " |" << std::endl;
+    std::cout << std::setw(40) << std::setfill('-') << "-" << std::endl << std::setfill(' ');
+
+}
+
 void Player::seeInventory() {
 	for(int i = 0; i < 128; i++) {
 		if(this->inventory[i].getName() != "") {
@@ -116,14 +140,6 @@ void Player::setLocation(int x, int y) {
 }
 
 void Player::getLocation() {	
-
-}
-
-void Player::getStats() {
-
-}
-
-void Player::setStats(int stat) {
 
 }
 
@@ -166,4 +182,8 @@ void Player::decrementPotionCount() {
 
 bool Player::hasPotion() {
     return (this->potionCount > 0);
+}
+
+void Player::gainEXP(int exp) {
+    this->exp = this->exp + exp;
 }

@@ -5,8 +5,12 @@
 class Player {
 
 public: 
+
+    // Player initialization functions
 	Player(int x, int y);
 	~Player();
+
+    // Inventory functions
 	int findNextSlot(); 
 	void giveItem(Item item);
 	void takeItem(Item item);
@@ -14,29 +18,49 @@ public:
 	void deleteItem(int index);
     void getEquipment();
 	void seeInventory();
+
+    // Setters
 	void setLocation(int x, int y);
-	void getLocation();
 	void setStats(int stat);
-	void getStats();
     void setLevel(int level) { this->level = level; }
-    int  getLevel() { return this->level; }
     void setName(std::string name) { this->name = name; }
+    void setStr(int str) { this->strengthStat = str; }
+    void setThf(int thf) { this->thiefStat = thf; }
+    void setLit(int lit) { this->literacyStat = lit; }
+    void setPlayerClass(std::string playerClass) { this->playerClass = playerClass; }
+
+    // Getters 
+	void getLocation();
+	void getStats();
+    int  getLevel() { return this->level; }
     std::string getName() { return this->name; }
     int getStr() { return this->strengthStat; }
+    int getThf() { return this->thiefStat; }
+    int getLit() { return this->literacyStat; }
+    int getEXP() { return this->exp; }
+    std::string getPlayerClass() { return this->playerClass; }
+
+    // Location Functions
 	void setRoom(Room * room);
 	Room * getRoom() { return this->currRoom; }
 	std::string getRoomName() { return this->currRoom->getRoomName(); }
+
+    // Potion Functions
+    void setPotionCount(int pc) { this->potionCount = pc; }
+    int getPotionCount() { return this->potionCount; }
+    void incrementPotionCount();
+    void decrementPotionCount();
+    bool hasPotion();
+
+    // Battle functions
     void setCurrHP(int hp);
     void takeDamage(int hp);
     int getCurrHP() { return this->healthPoints; }
     int getMaxHP() { return this->maxHealth; }
 	bool alive() { return this->healthPoints >= 0; }
     int determineDmg();
-    void setPotionCount(int pc) { this->potionCount = pc; }
-    int getPotionCount() { return this->potionCount; }
-    void incrementPotionCount();
-    void decrementPotionCount();
-    bool hasPotion();
+    void gainEXP(int exp);
+
 
 private:
 	Item inventory[128];
@@ -51,8 +75,10 @@ private:
 	int healthPoints = 100;
 	int maxHealth = 100;
     int level = 1;
+    int exp = 0;
     int potionCount;
     std::string name;
+    std::string playerClass;
 
 };
 #endif

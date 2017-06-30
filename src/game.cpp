@@ -92,6 +92,34 @@ void gameLoop() {
     std::cout << "What is your name? ";
     std::cin >> strChoice;
     player.setName(strChoice);
+
+    //Get player's class
+    std::cout << "--------------------------------------------------" << std::endl;
+    std::cout << "| 1. Warrior (6 STR, 1 LIT, 0 THF)               |" << std::endl;
+    std::cout << "| 2. Mage    (2 STR, 5 LIT, 1 THF)               |" << std::endl;
+    std::cout << "| 3. Thief   (3 STR, 2 LIT, 4 THF)               |" << std::endl;
+    std::cout << "--------------------------------------------------" << std::endl;
+    std::cout << "Choose your class. ";
+    std::cin >> choice;
+    if(choice == 1) {
+        player.setStr(6);
+        player.setLit(1);
+        player.setThf(0);
+    } else if(choice == 2) {
+        player.setStr(2);
+        player.setLit(5);
+        player.setThf(1);
+    } else if(choice == 3) {
+        player.setStr(3);
+        player.setLit(2);
+        player.setThf(4);
+    } else {
+        std::cout << "Invalid choice. Choosing for you." << std::endl;
+        player.setStr(6);
+        player.setLit(1);
+        player.setThf(0);
+    } 
+
 /*   
     // Welcome the player
     std::string welcome = "    Hello " + player.getName() + ".\n\n";
@@ -151,7 +179,8 @@ void gameLoop() {
 				menu.setChoice(3, "View map.");
 				menu.setChoice(4, "View inventory.");
                 menu.setChoice(5, "View equipment.");
-				menu.setChoice(6, "Save and quit.");
+                menu.setChoice(6, "View stats.");
+				menu.setChoice(7, "Save and quit.");
                 std::cout << std::endl;
 				menu.printChoices();
                 std::cout << std::endl << "What is your choice? ";
@@ -214,7 +243,15 @@ void gameLoop() {
 							std::cin >> charChoice;
 						}
 						break;
-                    case 7:
+                    case 7: 
+                        std::cout << "\033[2J\033[1;1H";
+                        player.getStats();
+						std::cout << "\nPress 'y' followed by 'ENTER' to continue." << std::endl;
+						while(charChoice != 'y') {
+							std::cin >> charChoice;
+						}
+						break;
+                    case 8:
                         return;
 					default: 
                         std::cout << "You entered an invalid option. Try again." << std::endl;
@@ -378,7 +415,7 @@ void gameLoop() {
                     case 3:
                         enemy.setName("Remnant Knight");
                         enemy = Enemy(enemy.getName());
-                        enemy.setStats(30, 3, 7, 0, 0, false);
+                        enemy.setStats(30, 3, 7, 0, 0, false, 50);
                         enemy.battle(&player, enemy);
                         break;
                     case 4:
@@ -441,7 +478,7 @@ void gameLoop() {
                 case 2:
                     enemy.setName("Remnant Knight");
                     enemy = Enemy(enemy.getName());
-                    enemy.setStats(30, 3, 7, 0, 0, false);
+                    enemy.setStats(30, 3, 7, 0, 0, false, 50);
                     enemy.battle(&player, enemy);
                     break;
                 case 3:
