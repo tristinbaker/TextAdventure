@@ -21,6 +21,7 @@ public:
 	std::string getLore() { return lore; }
 	Item getItem() { return this->item; }
 	bool containsItem() { return this->hasItem; }
+    bool containsEnemy() { return this->hasEnemy; }
 	void setItem(Item item) { this->item = item; }
 
 private: 	

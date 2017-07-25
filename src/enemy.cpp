@@ -30,11 +30,13 @@ void Enemy::battle(Player *player, Enemy enemy) {
     menuText = "Attack " + enemy.getName() + ".";
     this->battleMenu.setChoice(0, menuText); 
     this->battleMenu.setChoice(1, "Heal yourself.");
+    std::cout << "\033[2J\033[1;1H";
     while(enemy.getCurrHP() >= 0) {
         enemyDmg = enemy.determineDmg();
         playerDmg = player->determineDmg();
         if(player->alive()) {
-		    std::cout << "\033[2J\033[1;1H";
+		    //std::cout << "\033[2J\033[1;1H";
+            std::cout << std::endl;
             std::cout << "----------------------------------------------------------------------------------" << std::endl;
             std::cout << enemy.getName() << ": " << enemy.getCurrHP() << "/" << enemy.getMaxHP() << std::endl;
             std::cout << "----------------------------------------------------------------------------------" << std::endl;
@@ -45,6 +47,7 @@ void Enemy::battle(Player *player, Enemy enemy) {
             std::cin >> option;
             switch(option) {
             case 1: 
+		        std::cout << "\033[2J\033[1;1H";
                 std::cout << "----------------------------------------------------------------------------------" << std::endl;
                 std::cout << player->getName() << " hit " << enemy.getName() << " for " <<
                     playerDmg << " damage. " << std::endl;

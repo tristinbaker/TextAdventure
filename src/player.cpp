@@ -13,8 +13,7 @@ Player::Player(int x, int y) {
 
 Player::~Player() {}
 
-int Player::findNextSlot() {
-	for(int i = 0; i < 128; i++) {
+int Player::findNextSlot() { for(int i = 0; i < 128; i++) {
 		if(this->inventory[i].getAllocated() == 0) {
 			this->inventory[i].setAllocated(1);
 			return i;
@@ -92,13 +91,19 @@ void Player::getEquipment() {
 
 void Player::getStats() {
    
-    // Weapon information
+    // Player information
     std::cout << std::setw(40) << std::setfill('-') << "-" << std::endl << std::setfill(' ');
-    std:: cout << "| Name: " << std::setw(15) << std::left << this->getName()  
+    std:: cout << "| Name: " << std::setw(15) << std::left << this->getName()
         << " |" << " Level: " << std::setw(5) << this->getLevel() << " |" << std::endl;
     std::cout << std::setw(40) << std::setfill('-') << "-" << std::endl << std::setfill(' ');
 
-    // Armor Information
+    std::cout << std::setw(40) << std::setfill('-') << "-" << std::endl << std::setfill(' ');
+    std::cout << "| HP: " << std::setw(3) << std::right << this->getCurrHP() << std::left 
+        << "/" << std::left << std::setw(14) << this->getMaxHP() << std::left 
+        << "| Exp: " << std::setw(7) << std::left << this->getEXP() << " |" << std::endl;
+    std::cout << std::setw(40) << std::setfill('-') << "-" << std::endl << std::setfill(' ');
+
+    // Stat Information
     std::cout << std::setw(40) << std::setfill('-') << "-" << std::endl << std::setfill(' ');
     std:: cout << "| Strength: " << std::setw(26) << this->getStr() << " |" << std::endl; 
     std::cout << std::setw(40) << std::setfill('-') << "-" << std::endl << std::setfill(' ');
