@@ -23,6 +23,7 @@ public:
 	bool containsItem() { return this->hasItem; }
     bool containsEnemy() { return this->hasEnemy; }
 	void setItem(Item item) { this->item = item; }
+    void setRoomAtExit(std::string direction, Room *room);
 
 private: 	
 	std::string lore;
@@ -31,5 +32,11 @@ private:
 	bool hasBoss;
 	std::string roomName;
 	Item item;
+
+    // North, south, east, west rooms
+    Room *nRoom;
+    Room *eRoom;
+    Room *wRoom;
+    Room *sRoom;
 };
 #endif

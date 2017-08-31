@@ -5,7 +5,7 @@ class Item {
 public:
 	Item();
 	Item(std::string name);
-    void setStats(int lit, int str, int thf, bool isKey, bool isWeapon, int defense, int hp);
+    void setStats(int lit, int str, int thf, bool isKey, bool isWeapon, bool isArmor, bool isConsumable, int defense, int hp);
 	void setAllocated(int i) { this->allocated = i; }
 	bool getAllocated() { return this->allocated; }
 	bool isSameItem(Item i) { return this->name == i.name; }
@@ -24,7 +24,7 @@ private:
 	int lit, str, thf;
     int defense;
     int hp;
-	bool isKey, isWeapon;
+	bool isKey, isWeapon, isArmor, isConsumable;
 	std::string name;
 	bool allocated = 0;
 	

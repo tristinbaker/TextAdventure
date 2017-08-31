@@ -25,3 +25,18 @@ void Room::determineLore() {
 }
 
 Room::~Room() {}
+
+void Room::setRoomAtExit(std::string direction, Room *room) {
+    if(direction == "north") {
+        room = this->nRoom;
+    } else if(direction == "south") {
+        room = this->sRoom;
+    } else if(direction == "west") {
+        room = this->wRoom;
+    } else if(direction == "east") {
+        room = this->eRoom;
+    } else {
+        std::cout << "Invalid room." << std::endl;
+    }
+
+}

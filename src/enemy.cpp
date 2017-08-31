@@ -29,7 +29,7 @@ void Enemy::battle(Player *player, Enemy enemy) {
     this->battleMenu.clearChoices();
     menuText = "Attack " + enemy.getName() + ".";
     this->battleMenu.setChoice(0, menuText); 
-    this->battleMenu.setChoice(1, "Heal yourself.");
+    this->battleMenu.setChoice(1, "Use item.");
     std::cout << "\033[2J\033[1;1H";
     while(enemy.getCurrHP() >= 0) {
         enemyDmg = enemy.determineDmg();
@@ -60,9 +60,12 @@ void Enemy::battle(Player *player, Enemy enemy) {
                 usleep(2000000);
                 break;
             case 2: 
+                player->seeInventory(); 
                 if(player->hasPotion()) {
-                    player->setCurrHP(30); 
+                    player->healHP(30); 
                     player->decrementPotionCount();
+                    int i = player->potionIndex();
+                    player->removePotion(i);
                     std::cout << "You have healed 30HP. You are now at " << player->getCurrHP() << "/" 
                         << player->getMaxHP() << std::endl;
                 } else {
@@ -79,7 +82,7 @@ void Enemy::battle(Player *player, Enemy enemy) {
            std::cout << "You have died. Game over." << std::endl;
        }
     }
-    std::cout << enemy.getName() << " has been slain.";
+    std::cout << '\n' << enemy.getName() << " has been slain.";
     player->gainEXP(enemy.getEXP());
 	std::cout << "\nPress 'y' followed by 'ENTER' to continue." << std::endl;
 	while(choice != 'y') {

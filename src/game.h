@@ -4,5 +4,8 @@
 void init();	
 void gameLoop();
 void loadArt(std::string artName);
+void welcomePlayer();
+void clearScreen();
+void askToEnterDungeon();
 
 #endif

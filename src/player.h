@@ -2,6 +2,7 @@
 #define PLAYER_H
 #include "item.h"
 #include "room.h"
+#include <memory>
 class Player {
 
 public: 
@@ -28,10 +29,14 @@ public:
     void setThf(int thf) { this->thiefStat = thf; }
     void setLit(int lit) { this->literacyStat = lit; }
     void setPlayerClass(std::string playerClass) { this->playerClass = playerClass; }
+    void assignClassStats(std::string playerClass);
+    void setInitialEquipment();
 
     // Getters 
 	void getLocation();
 	void getStats();
+    std::string askForPlayerName();
+    void askForPlayerClass();
     int  getLevel() { return this->level; }
     std::string getName() { return this->name; }
     int getStr() { return this->strengthStat; }
@@ -51,9 +56,11 @@ public:
     void incrementPotionCount();
     void decrementPotionCount();
     bool hasPotion();
+    int potionIndex();
+    void removePotion(int i);
 
     // Battle functions
-    void setCurrHP(int hp);
+    void healHP(int hp);
     void takeDamage(int hp);
     int getCurrHP() { return this->healthPoints; }
     int getMaxHP() { return this->maxHealth; }
@@ -64,7 +71,7 @@ public:
 
 private:
 	Item inventory[128];
-	Item equippedWeapon;
+    Item equippedWeapon;
     Item equippedHelm;
     Item equippedChest;
     Item equippedPants;

@@ -1,0 +1,85 @@
+{
+  "room": [
+    {
+      "START": {
+        "items": {
+          "Rusty Sword": {
+            "lit":          0,
+            "str":          5,
+            "thf":          0,
+            "isKey":        false,
+            "isWeapon":     true,
+            "isArmor":      false,
+            "isConsumable": false,
+            "def":          0,
+            "hp":           0
+          }
+        },
+        "exits": {
+          "left": "ARTIE"
+        },
+        "lore": {
+          "init":"You wake up in a dark room. You look around and jot down what you see in your notebook.",
+          "paragraph1": "Your head throbs, your body aches, as you slowly come to. You don’t remember what  happened before you fell asleep and as you open your eyes you realize that you have no idea where you are. The air was heavy with moisture and smelled of mold and in the distance you could hear water dripping onto the stone floor, echoing through the barely illuminated hallway to your left. As you take a moment to collect yourself you realize that you are in a square room, made entirely of grey stone bricks,  with three altar like slabs against the walls. As you shuffle and get your bearings you realize that you were laid upon one of these slabs, stripped of all possessions.",
+          "paragraph2": "Faintly from the hall you hear what sounds like a scream. You realize then that you are not in a safe place and you strain your eyes to search the room you are in for some sort of weapon. It is at this point you take note of the skeletal remains at the center of the room and as you rise to inspect you realize that this unfortunate warrior grasped a rusted-out sword. Dull as it may be, it would be wise to take it. As you scan the rest of the room you notice two other bodies on the other slabs. Will you investigate these bodies or will you begin your escape?"
+        },
+        "choices": {
+          "menuChoice1": "Pick up sword.",
+          "menuChoice2": "Leave Room (Left)"
+        }
+      }
+    },
+    {
+      "ARTIE": {
+        "exits": {
+          "left":  "DAYAK",
+          "up":    "MITRE",
+          "right": "START"
+        },
+        "lore": {},
+        "choices": {
+          "menuChoice1": "Leave Room (Left)",
+          "menuChoice2": "Leave Room (Up)",
+          "menuChoice3": "Leave Room (Right)"
+        }
+      }
+    },
+    {
+      "DAYAK": {
+        "items": { 
+          "Potion": {
+            "lit":          0,
+            "str":          0,
+            "thf":          0,
+            "isKey":        false,
+            "isWeapon":     false,
+            "isArmor":      false,
+            "isConsumable": true,
+            "def":          0,
+            "hp":           30
+          }
+        },
+        "enemies": {
+          "Remnant Knight": {
+            "hp":         30,
+            "lowDmg":     3,
+            "highDmg":    7,
+            "weakness":   0,
+            "resistance": 0,
+            "isBoss":     false,
+            "exp":        50
+          }
+        },
+        "exits": {
+          "right": "ARTIE"
+        },
+        "lore": {},
+        "choices": {
+          "menuChoice1": "Leave Room (Right)",
+          "menuChoice2": "Pick up potion.",
+          "menuChoice3": "Fight Remnant Knight."
+        }
+      }
+    }
+  ]
+}
